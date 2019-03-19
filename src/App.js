@@ -1,25 +1,54 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
+import DisplayTodo from './components/DisplayTodo'
 
 class App extends Component {
+  constructor (props){
+    console.log("Calling Constructor")
+    super(props)
+    this.state = {
+      todos : [
+        {
+          name : 'ToDo app',
+          completed : false
+        }
+      ]
+    }
+  }
+
+ addTodo(){
+   console.log("Calling Todo",+ this.state.completed)
+   this.setState(() => {
+     return{
+       todos: [
+         {
+           name:'Test',
+           completed: true
+         }
+       ]
+     }
+   })
+ }
+
+ deleteTodo(){
+   console.log("deleteTodo")
+ }
+
+
   render() {
+    console.log("Calling Render")
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <div className="todoForm">
+          <h2>Create Todo</h2>
+          <input type="text" placeholder= "Todo" value={this.state.value} />
+          <button className="Button"
+                  onClick={() => this.addTodo()}>
+            Submit
+          </button>
+          <DisplayTodo  todoList = {this.state.todos}/>
+        </div>
+
       </div>
     );
   }
